@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Traits;
+namespace Modules\Common\Traits;
+
+use function response;
 
 Trait ApiResponse
 {
