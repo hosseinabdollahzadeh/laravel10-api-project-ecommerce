@@ -18,9 +18,9 @@ return new class extends Migration
 
             $table->foreignId('province_id');
             $table->foreign('province_id')->references('id')->on('provinces')->onDelete('cascade');
-            $table->softDeletes();
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

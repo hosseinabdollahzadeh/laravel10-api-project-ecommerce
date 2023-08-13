@@ -6,9 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
-use Modules\Brand\Database\Repositories\BrandRepo;
+use Modules\Brand\Database\Repositories\Api\V1\BrandRepo;
 use Modules\Brand\Entities\Brand;
-use Modules\Brand\Http\Requests\CreateBrandRequest;
 use Modules\Brand\Transformers\V1\BrandResource;
 use Modules\Common\Http\Controllers\ApiController;
 
@@ -20,7 +19,7 @@ class BrandController extends ApiController
      */
     public function index(BrandRepo $repo)
     {
-        $brands = $repo->paginate(2);
+        $brands = $repo->paginate();
         return $this->successResponse([
             'brands' => BrandResource::collection($brands),
             'links' => BrandResource::collection($brands)->response()->getData()->links,
@@ -67,9 +66,22 @@ class BrandController extends ApiController
      * @param int $id
      * @return Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Brand $brand, BrandRepo $repo)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|unique:brands,name',
+            'display_name' => 'required|unique:brands,display_name'
+        ]);
+
+        if ($validator->fails()) {
+            return $this->errorResponse($validator->messages(), 422);
+        }
+
+        DB::beginTransaction();
+        $repo->update($brand->id, $request);
+        DB::commit();
+
+        return $this->successResponse(new BrandResource($brand), 200);
     }
 
     /**
@@ -77,8 +89,11 @@ class BrandController extends ApiController
      * @param int $id
      * @return Response
      */
-    public function destroy($id)
+    public function destroy(Brand $brand)
     {
-        //
+        DB::beginTransaction();
+        $brand->delete();
+        DB::commit();
+        return $this->successResponse(new BrandResource($brand), 200);
     }
 }

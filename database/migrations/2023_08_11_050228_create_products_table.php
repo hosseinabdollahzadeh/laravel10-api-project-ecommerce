@@ -28,9 +28,9 @@ return new class extends Migration
             $table->unsignedInteger('price')->default(0);
             $table->unsignedInteger('quantity')->default(0);
             $table->unsignedInteger('delivery_amount')->default(0);
-            $table->softDeletes();
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -22,9 +22,9 @@ return new class extends Migration
             $table->unsignedInteger('delivery_amount')->default(0);
             $table->unsignedInteger('paying_amount');
             $table->tinyInteger('payment_status')->default(0);
-            $table->softDeletes();
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -25,9 +25,9 @@ return new class extends Migration
             $table->string('trans_id')->nullable();
             $table->tinyInteger('status')->default(0);
             $table->string('request_from')->default('web');
-            $table->softDeletes();
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
