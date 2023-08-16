@@ -2,14 +2,12 @@
 
 namespace Modules\Category\Http\Controllers\Api\V1;
 
-use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
-use Modules\Brand\Database\Repositories\Api\V1\BrandRepo;
 use Modules\Category\Database\Repositories\Api\V1\CtegoryRepo;
+use Modules\Category\Entities\Category;
 use Modules\Category\Transformers\V1\CategoryResource;
 use Modules\Common\Http\Controllers\ApiController;
 

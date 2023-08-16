@@ -2,7 +2,7 @@
 
 namespace Modules\Category\Database\Repositories\Api\V1;
 
-use App\Models\Category;
+use Modules\Category\Entities\Category;
 
 class CtegoryRepo
 {
