@@ -21,7 +21,7 @@ class CategoryController extends ApiController
     {
         $category = $repo->paginate();
         return $this->successResponse([
-            'brands' => CategoryResource::collection($category),
+            'categories' => CategoryResource::collection($category),
             'links' => CategoryResource::collection($category)->response()->getData()->links,
             'meta' => CategoryResource::collection($category)->response()->getData()->meta,
         ]);
