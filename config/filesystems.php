@@ -38,8 +38,10 @@ return [
 
         'public' => [
             'driver' => 'local',
+            //for store in public folder directly, use the below line, if use this line not need to use: storage:link for deploy
+//          'root' => public_path().'/storage',
             'root' => storage_path('app/public'),
-            'url' => env('APP_URL').'/storage',
+            'url' => env('APP_URL') . '/storage',
             'visibility' => 'public',
             'throw' => false,
         ],
