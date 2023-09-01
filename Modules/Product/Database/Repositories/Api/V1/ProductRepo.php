@@ -28,14 +28,6 @@ class ProductRepo
     {
         $primaryImageName = generateFileName($values->primary_image->getClientOriginalName());
         $values->primary_image->storeAs('images/products', $primaryImageName, 'public');
-        if($values->has('images')){
-            $images = [];
-            foreach ($values->images as $image){
-                $imageName = generateFileName($image->getClientOriginalName());
-                $image->storeAs('images/products', $imageName, 'public');
-                $images[] = $imageName;
-            }
-        }
 
         $product = Product::create([
             'name' => $values->name,
@@ -47,11 +39,6 @@ class ProductRepo
             'quantity' => $values->quantity,
             'delivery_amount' => $values->delivery_amount,
         ]);
-
-        if($values->has('images')){
-            $productImageRepo = new ProductImageRepo();
-            $productImageRepo->store($product, $images);
-        }
         return $product;
     }
 

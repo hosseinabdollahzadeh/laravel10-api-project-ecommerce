@@ -24,6 +24,7 @@ class ProductResource extends JsonResource
             'price' => $this->price,
             'quantity' => $this->quantity,
             'delivery_amount' => $this->delivery_amount,
+            'images' => ProductImageResource::collection($this->whenLoaded('images'))
         ];
     }
 }

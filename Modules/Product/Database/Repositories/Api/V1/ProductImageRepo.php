@@ -6,14 +6,12 @@ use Modules\Product\Entities\ProductImage;
 
 class ProductImageRepo
 {
-    public function store($product, $images)
+    public function store($product, $image)
     {
-        foreach ($images as $image){
-            ProductImage::create([
-                'product_id' => $product->id,
-                'image' => $image,
-            ]);
-        }
+        return ProductImage::create([
+            'product_id' => $product->id,
+            'image' => $image,
+        ]);
 
     }
 }
