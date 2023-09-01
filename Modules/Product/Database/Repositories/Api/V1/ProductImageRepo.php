@@ -12,6 +12,5 @@ class ProductImageRepo
             'product_id' => $product->id,
             'image' => $image,
         ]);
-
     }
 }

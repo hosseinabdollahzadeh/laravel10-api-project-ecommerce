@@ -3,6 +3,8 @@
 namespace Modules\Product\Database\Repositories\Api\V1;
 
 
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use Modules\Product\Entities\Product;
 
 class ProductRepo
@@ -27,7 +29,7 @@ class ProductRepo
     public function store($values)
     {
         $primaryImageName = generateFileName($values->primary_image->getClientOriginalName());
-        $values->primary_image->storeAs('images/products', $primaryImageName, 'public');
+        $values->primary_image->storeAs(env('PRODUCT_IMAGES_UPLOAD_PATH'), $primaryImageName, 'public');
 
         $product = Product::create([
             'name' => $values->name,
@@ -42,12 +44,37 @@ class ProductRepo
         return $product;
     }
 
-    public function update($id, $values)
+    public function update($product, $values)
     {
-        $brand = $this->findById($id);
-        return $brand->update([
+        if($values->has('primary_image')){
+            // delete previous primary_image
+            $primaryImagePath = public_path('/storage'.env('PRODUCT_IMAGES_UPLOAD_PATH').$product->primary_image);
+            if(File::exists($primaryImagePath)) {
+                File::delete($primaryImagePath);
+            }
+            $primaryImageName = generateFileName($values->primary_image->getClientOriginalName());
+            $values->primary_image->storeAs(env('PRODUCT_IMAGES_UPLOAD_PATH'), $primaryImageName, 'public');
+        }
+
+        $product->update([
             'name' => $values->name,
-            'display_name' => $values->display_name,
+            'brand_id' => $values->brand_id,
+            'category_id' => $values->category_id,
+            'primary_image' => $primaryImageName ?? $product->primary_image,
+            'description' => $values->description,
+            'price' => $values->price,
+            'quantity' => $values->quantity,
+            'delivery_amount' => $values->delivery_amount,
         ]);
+        return $product;
+    }
+
+    public function delete($product)
+    {
+        // delete primary_image
+        $primaryImagePath = public_path('/storage'.env('PRODUCT_IMAGES_UPLOAD_PATH').$product->primary_image);
+        if(File::exists($primaryImagePath)) {
+            File::delete($primaryImagePath);
+        }
     }
 }

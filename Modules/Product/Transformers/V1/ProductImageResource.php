@@ -9,7 +9,7 @@ class ProductImageResource extends JsonResource
     /**
      * Transform the resource into an array.
      *
-     * @param  \Illuminate\Http\Request
+     * @param \Illuminate\Http\Request
      * @return array
      */
     public function toArray($request)
@@ -17,7 +17,7 @@ class ProductImageResource extends JsonResource
         return [
             'id' => $this->id,
             'product_id' => $this->product_id,
-            'image' => url(env('PRODUCT_IMAGES_UPLOAD_PATH').$this->image),
+            'image' => url('/storage' . env('PRODUCT_IMAGES_UPLOAD_PATH') . $this->image),
         ];
     }
 }
