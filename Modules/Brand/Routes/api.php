@@ -20,4 +20,5 @@ use Modules\Brand\Http\Controllers\Api\V1\BrandController as V1BrandController;
 
 Route::prefix('v1')->group(function (){
     Route::apiResource('brands', V1BrandController::class);
+    Route::get('/brands/{brand}/products', [V1BrandController::class, 'products']);
 });

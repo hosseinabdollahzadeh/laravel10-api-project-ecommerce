@@ -96,4 +96,9 @@ class BrandController extends ApiController
         DB::commit();
         return $this->successResponse(new BrandResource($brand), 200);
     }
+
+    public function products(Brand $brand)
+    {
+        return  $this->successResponse(new BrandResource($brand->load('products')));
+    }
 }
