@@ -23,4 +23,5 @@ Route::prefix('v1')->group(function (){
     Route::apiResource('categories', V1CategoryController::class);
     Route::get('categories/{category}/children', [V1CategoryController::class, 'children']);
     Route::get('categories/{category}/parent', [V1CategoryController::class, 'parent']);
+    Route::get('categories/{category}/products', [V1CategoryController::class, 'products']);
 });

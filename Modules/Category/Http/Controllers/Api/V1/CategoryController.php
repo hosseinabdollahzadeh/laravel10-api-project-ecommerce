@@ -99,11 +99,16 @@ class CategoryController extends ApiController
 
     public function children(Category $category)
     {
-        return $this->successResponse(new CategoryResource($category->load('children')), 200);
+        return $this->successResponse(new CategoryResource($category->load('children')));
     }
 
     public function parent(Category $category)
     {
-        return $this->successResponse(new CategoryResource($category->load('parent')), 200);
+        return $this->successResponse(new CategoryResource($category->load('parent')));
+    }
+
+    public function products(Category $category)
+    {
+        return  $this->successResponse(new CategoryResource($category->load('products')));
     }
 }
