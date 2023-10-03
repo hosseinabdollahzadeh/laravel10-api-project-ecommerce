@@ -33,8 +33,8 @@ class PaymentServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(module_path($this->moduleName, 'Database/Migrations'));
 
         $this->app->singleton(Gateway::class, function ($app){
-            return new PayAdaptor();
-//            return new ZibalAdaptor();
+//            return new PayAdaptor();
+            return new ZibalAdaptor();
         });
     }
 

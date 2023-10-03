@@ -18,22 +18,22 @@ use Illuminate\Support\Facades\Http;
 Route::prefix('payment')->group(function() {
 
     //pay.ir
-    Route::get('/verify', function (Request $request){
-        $response = Http::post('http://laravel10-api-project-ecommerce.test/api/v1/payment/verify', [
-            'token' => $request->token,
-            'status' => $request->status
-        ]);
-
-        dd($response->json());
-    });
-
-    // zibal.ir
 //    Route::get('/verify', function (Request $request){
 //        $response = Http::post('http://laravel10-api-project-ecommerce.test/api/v1/payment/verify', [
-//            'trackId' => $request->trackId,
-//            'success' => $request->success
+//            'token' => $request->token,
+//            'status' => $request->status
 //        ]);
 //
 //        dd($response->json());
 //    });
+
+    // zibal.ir
+    Route::get('/verify', function (Request $request){
+        $response = Http::post('http://laravel10-api-project-ecommerce.test/api/v1/payment/verify', [
+            'trackId' => $request->trackId,
+            'success' => $request->success
+        ]);
+
+        dd($response->json());
+    });
 });
