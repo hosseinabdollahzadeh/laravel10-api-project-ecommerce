@@ -2,5 +2,6 @@
     "Common": true,
     "Brand": true,
     "Category": true,
-    "Product": true
+    "Product": true,
+    "Payment": true
 }
