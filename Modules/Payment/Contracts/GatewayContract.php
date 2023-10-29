@@ -9,4 +9,7 @@ interface GatewayContract
 {
     public function request($amount, $description);
     public function verify(Request $request);
+    public function redirect();
+    public function getName();
+
 }

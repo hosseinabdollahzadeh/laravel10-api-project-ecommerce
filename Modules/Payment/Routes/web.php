@@ -14,26 +14,30 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Route;
 
-Route::prefix('payment')->group(function() {
+Route::prefix('payment')->group(function () {
 
     //pay.ir
-//    Route::get('/verify', function (Request $request){
-//        $response = Http::post('http://laravel10-api-project-ecommerce.test/api/v1/payment/verify', [
-//            'token' => $request->token,
-//            'status' => $request->status
-//        ]);
-//
-//        dd($response->json());
-//    });
-
-    // zibal.ir
-    Route::get('/verify', function (Request $request){
-        $response = Http::post('http://laravel10-api-project-ecommerce.test/api/v1/payment/verify', [
-            'trackId' => $request->trackId,
-            'success' => $request->success
-        ]);
-
-        dd($response->json());
-    });
+    Route::get('/verify/{gatewayName}', function (Request $request) {
+        $gatewayName = $request->gatewayName;
+        switch ($gatewayName) {
+            case 'pay':
+                $response = Http::post('http://laravel10-api-project-ecommerce.test/api/v1/payment/verify', [
+                    'token' => $request->token,
+                    'status' => $request->status,
+                    'gateway' => $gatewayName,
+                ]);
+                return $response;
+                break;
+            case 'zibal':
+                $response = Http::post('http://laravel10-api-project-ecommerce.test/api/v1/payment/verify', [
+                    'trackId' => $request->trackId,
+                    'success' => $request->success,
+                    'gateway' => $gatewayName,
+                ]);
+                return $response;
+                break;
+        }
+    })->name('payment_verify');
 });

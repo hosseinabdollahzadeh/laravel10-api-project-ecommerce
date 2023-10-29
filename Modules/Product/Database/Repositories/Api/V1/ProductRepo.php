@@ -21,7 +21,7 @@ class ProductRepo
         return $this->query->paginate($perPage);
     }
 
-    public function findById($id)
+    public static function findById($id)
     {
         return Product::query()->findOrFail($id);
     }
