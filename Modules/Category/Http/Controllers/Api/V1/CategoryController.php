@@ -15,7 +15,7 @@ class CategoryController extends ApiController
 {
     /**
      * Display a listing of the resource.
-     * @return Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index(CtegoryRepo $repo)
     {
@@ -30,7 +30,7 @@ class CategoryController extends ApiController
     /**
      * Store a newly created resource in storage.
      * @param Request $request
-     * @return Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(Request $request, CtegoryRepo $repo)
     {
@@ -53,7 +53,7 @@ class CategoryController extends ApiController
     /**
      * Show the specified resource.
      * @param int $id
-     * @return Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function show(Category $category)
     {
@@ -64,7 +64,7 @@ class CategoryController extends ApiController
      * Update the specified resource in storage.
      * @param Request $request
      * @param int $id
-     * @return Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(Request $request, Category $category, CtegoryRepo $repo)
     {
@@ -87,9 +87,9 @@ class CategoryController extends ApiController
     /**
      * Remove the specified resource from storage.
      * @param int $id
-     * @return Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy(Category $category)
+    public function destroy(Category $category): \Illuminate\Http\JsonResponse
     {
         DB::beginTransaction();
         $category->delete();
@@ -97,17 +97,17 @@ class CategoryController extends ApiController
         return $this->successResponse(new CategoryResource($category), 200);
     }
 
-    public function children(Category $category)
+    public function children(Category $category): \Illuminate\Http\JsonResponse
     {
         return $this->successResponse(new CategoryResource($category->load('children')));
     }
 
-    public function parent(Category $category)
+    public function parent(Category $category): \Illuminate\Http\JsonResponse
     {
         return $this->successResponse(new CategoryResource($category->load('parent')));
     }
 
-    public function products(Category $category)
+    public function products(Category $category): \Illuminate\Http\JsonResponse
     {
         return  $this->successResponse(new CategoryResource($category->load('products')));
     }

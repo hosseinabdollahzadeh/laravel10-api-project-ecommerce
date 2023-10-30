@@ -19,7 +19,7 @@ class ProductController extends ApiController
 {
     /**
      * Display a listing of the resource.
-     * @return Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index(ProductRepo $repo)
     {
@@ -34,7 +34,7 @@ class ProductController extends ApiController
     /**
      * Store a newly created resource in storage.
      * @param Request $request
-     * @return Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(Request $request, ProductRepo $productRepo, ProductImageRepo $productImageRepo)
     {
@@ -76,7 +76,7 @@ class ProductController extends ApiController
     /**
      * Show the specified resource.
      * @param int $id
-     * @return Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function show(Product $product)
     {
@@ -87,9 +87,9 @@ class ProductController extends ApiController
      * Update the specified resource in storage.
      * @param Request $request
      * @param int $id
-     * @return Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, Product $product, ProductRepo $productRepo, ProductImageRepo $productImageRepo)
+    public function update(Request $request, Product $product, ProductRepo $productRepo, ProductImageRepo $productImageRepo): \Illuminate\Http\JsonResponse
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string',
@@ -139,9 +139,9 @@ class ProductController extends ApiController
     /**
      * Remove the specified resource from storage.
      * @param int $id
-     * @return Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy(Product $product, ProductRepo $productRepo)
+    public function destroy(Product $product, ProductRepo $productRepo): \Illuminate\Http\JsonResponse
     {
         DB::beginTransaction();
         // delete product images

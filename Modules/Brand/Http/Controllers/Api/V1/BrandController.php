@@ -10,12 +10,13 @@ use Modules\Brand\Database\Repositories\Api\V1\BrandRepo;
 use Modules\Brand\Entities\Brand;
 use Modules\Brand\Transformers\V1\BrandResource;
 use Modules\Common\Http\Controllers\ApiController;
+use Modules\Common\Traits\ApiResponse;
 
 class BrandController extends ApiController
 {
     /**
      * Display a listing of the resource.
-     * @return Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index(BrandRepo $repo)
     {
@@ -30,7 +31,7 @@ class BrandController extends ApiController
     /**
      * Store a newly created resource in storage.
      * @param Request $request
-     * @return Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(Request $request, BrandRepo $repo)
     {
@@ -53,7 +54,7 @@ class BrandController extends ApiController
     /**
      * Show the specified resource.
      * @param int $id
-     * @return Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function show(Brand $brand)
     {
@@ -64,7 +65,7 @@ class BrandController extends ApiController
      * Update the specified resource in storage.
      * @param Request $request
      * @param int $id
-     * @return Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(Request $request, Brand $brand, BrandRepo $repo)
     {
@@ -87,7 +88,7 @@ class BrandController extends ApiController
     /**
      * Remove the specified resource from storage.
      * @param int $id
-     * @return Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(Brand $brand)
     {

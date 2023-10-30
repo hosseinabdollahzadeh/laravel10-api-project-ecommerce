@@ -11,8 +11,6 @@ use Modules\Product\Entities\Product;
 
 class PaymentController extends ApiController
 {
-    use ApiResponse;
-
     public function send(Request $request)
     {
         $validator = Validator::make($request->all(), [
